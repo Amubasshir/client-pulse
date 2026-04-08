@@ -1,6 +1,5 @@
 import { auth } from '@/lib/auth';
 import { redirect, notFound } from 'next/navigation';
-import Link from 'next/link';
 import connectDB from '@/lib/db';
 import Project from '@/models/Project';
 import Update from '@/models/Update';
@@ -9,6 +8,7 @@ import AddUpdateModal from '@/components/AddUpdateModal';
 import UpdateCard from '@/components/UpdateCard';
 import AssignMembersModal from '@/components/AssignMembersModal';
 import DeleteProjectButton from '@/components/DeleteProjectButton';
+import BackLink from '@/components/BackLink';
 
 interface PopulatedMember {
   _id: string;
@@ -44,9 +44,9 @@ const STATUS_CONFIG = {
 
 const PLATFORM_LABEL: Record<string, string> = {
   whatsapp: 'WhatsApp',
-  fiverr: 'Fiverr',
-  upwork: 'Upwork',
-  other: 'Other',
+  fiverr:   'Fiverr',
+  upwork:   'Upwork',
+  other:    'Other',
 };
 
 type PageParams = { params: Promise<{ id: string }> };
@@ -66,7 +66,6 @@ export default async function ProjectDetailPage({ params }: PageParams) {
 
   if (!rawProject) notFound();
 
-  // Members can only view their assigned projects
   if (role !== 'admin') {
     const isMember = (rawProject.assignedMembers as { _id: { toString(): string } }[])
       .some((m) => m._id.toString() === userId);
@@ -90,7 +89,6 @@ export default async function ProjectDetailPage({ params }: PageParams) {
     assignedMembers: members,
   };
 
-  // Fetch all users for admin's assign-members modal
   const allUsers = role === 'admin'
     ? (await User.find({}).select('name email').sort({ name: 1 }).lean()).map((u) => ({
         _id: u._id.toString(),
@@ -128,161 +126,245 @@ export default async function ProjectDetailPage({ params }: PageParams) {
   const statusCfg = STATUS_CONFIG[project.status as keyof typeof STATUS_CONFIG] ?? STATUS_CONFIG.active;
 
   return (
-    <div style={{ padding: '32px 36px', maxWidth: 820 }}>
+    <div style={{ padding: '28px 36px', minHeight: '100%' }}>
 
       {/* Back link */}
-      <Link
-        href="/projects"
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: 5,
-          fontSize: 12, color: '#7A6B5D', textDecoration: 'none',
-          marginBottom: 20, transition: 'color 0.15s',
-        }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#C4956A'; }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#7A6B5D'; }}
-      >
-        ← Projects
-      </Link>
+      <BackLink href="/projects" label="Projects" />
 
-      {/* Project header */}
+      {/* ── Page header ─────────────────────────────── */}
       <div style={{
-        background: '#221E19',
-        border: '1px solid #2E2923',
-        borderRadius: 14,
-        padding: '24px 28px',
-        marginBottom: 28,
+        display: 'flex', alignItems: 'flex-start',
+        justifyContent: 'space-between', gap: 16, marginBottom: 24,
       }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            {/* Badges */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, flexWrap: 'wrap' }}>
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: 5,
-                background: statusCfg.bg, borderRadius: 20, padding: '3px 10px',
-                fontSize: 11, fontWeight: 500, color: statusCfg.text,
-              }}>
-                <span style={{ width: 5, height: 5, borderRadius: '50%', background: statusCfg.dot, flexShrink: 0 }} />
-                {statusCfg.label}
-              </span>
-              <span style={{
-                fontSize: 11, fontWeight: 500, color: '#7A6B5D',
-                background: '#1C1814', border: '1px solid #2E2923',
-                borderRadius: 6, padding: '3px 9px',
-              }}>
-                {PLATFORM_LABEL[project.platform] ?? project.platform}
-              </span>
-              {project.platformLink && (
-                <a
-                  href={project.platformLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontSize: 11, color: '#C4956A', textDecoration: 'none',
-                    background: 'rgba(196,149,106,0.08)', borderRadius: 6, padding: '3px 9px',
-                  }}
-                >
-                  Open link ↗
-                </a>
-              )}
-            </div>
-
-            {/* Name + client */}
-            <h1 style={{ margin: '0 0 4px', fontSize: 20, fontWeight: 700, color: '#F0E6DC', letterSpacing: '-0.025em' }}>
-              {project.name}
-            </h1>
-            <p style={{ margin: '0 0 10px', fontSize: 13, color: '#7A6B5D' }}>
-              Client: {project.clientName}
-            </p>
-
-            {project.description && (
-              <p style={{ margin: 0, fontSize: 13, color: '#B8A898', lineHeight: 1.6 }}>
-                {project.description}
-              </p>
-            )}
-          </div>
-
-          {/* Members + admin actions */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-            {role === 'admin' && (
-              <DeleteProjectButton projectId={project._id} projectName={project.name} />
-            )}
-            {members.length > 0 && (
-              <>
-                <span style={{ fontSize: 10, color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                  Team
-                </span>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {members.slice(0, 5).map((m, i) => (
-                    <span
-                      key={m._id}
-                      title={m.name}
-                      style={{
-                        width: 28, height: 28, borderRadius: '50%',
-                        background: `hsl(${(m.name.charCodeAt(0) * 17) % 360}, 25%, 28%)`,
-                        border: '2px solid #221E19',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: 11, fontWeight: 600, color: '#C4956A',
-                        marginLeft: i === 0 ? 0 : -8,
-                        position: 'relative', zIndex: 5 - i,
-                      }}
-                    >
-                      {m.name.charAt(0).toUpperCase()}
-                    </span>
-                  ))}
-                  {members.length > 5 && (
-                    <span style={{
-                      width: 28, height: 28, borderRadius: '50%',
-                      background: '#2A2520', border: '2px solid #221E19',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 9, color: '#7A6B5D', marginLeft: -8,
-                    }}>
-                      +{members.length - 5}
-                    </span>
-                  )}
-                </div>
-              </>
-            )}
-            {role === 'admin' && (
-              <AssignMembersModal
-                projectId={project._id}
-                assignedMemberIds={members.map((m) => m._id)}
-                allMembers={allUsers}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Updates section header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
         <div>
-          <h2 style={{ margin: '0 0 2px', fontSize: 15, fontWeight: 600, color: '#F0E6DC' }}>
-            Updates
-          </h2>
-          <p style={{ margin: 0, fontSize: 12, color: '#7A6B5D' }}>
-            {updates.length} update{updates.length !== 1 ? 's' : ''} logged
+          <h1 style={{
+            margin: '0 0 3px', fontSize: 24, fontWeight: 700,
+            color: '#F0E6DC', letterSpacing: '-0.025em',
+          }}>
+            {project.name}
+          </h1>
+          <p style={{ margin: 0, fontSize: 13, color: '#7A6B5D' }}>
+            (Client: {project.clientName})
           </p>
         </div>
-        <AddUpdateModal projectId={project._id} projectName={project.name} clientName={project.clientName} />
+
+        {/* Header action buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+          <button style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: '#221E19', border: '1px solid #2E2923',
+            borderRadius: 8, padding: '8px 14px',
+            fontSize: 12, fontWeight: 500, color: '#B8A898',
+            cursor: 'default', fontFamily: 'inherit',
+          }}>
+            ↑↓ Sort
+          </button>
+          <button style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: '#221E19', border: '1px solid #2E2923',
+            borderRadius: 8, padding: '8px 14px',
+            fontSize: 12, fontWeight: 500, color: '#B8A898',
+            cursor: 'default', fontFamily: 'inherit',
+          }}>
+            ▽ Filter
+          </button>
+          <AddUpdateModal
+            projectId={project._id}
+            projectName={project.name}
+            clientName={project.clientName}
+          />
+        </div>
       </div>
 
-      {/* Updates list */}
-      {updates.length === 0 ? (
-        <EmptyUpdates />
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {updates.map((update) => (
-            <UpdateCard
-              key={update._id}
-              update={update}
-              projectName={project.name}
-              clientName={project.clientName}
-              currentUserId={userId}
-              currentUserRole={role}
-            />
-          ))}
+      {/* ── Three-column info cards ──────────────────── */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: role === 'admin' ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
+        gap: 16,
+        marginBottom: 28,
+        alignItems: 'stretch',
+      }}>
+
+        {/* PROJECT INFO */}
+        <div style={{
+          background: '#221E19', border: '1px solid #2E2923',
+          borderRadius: 14, padding: '18px 20px',
+        }}>
+          <p style={{
+            margin: '0 0 14px', fontSize: 10, fontWeight: 700,
+            color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.1em',
+          }}>
+            Project Info
+          </p>
+
+          {/* Status */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+            <span style={{ fontSize: 13, color: '#7A6B5D' }}>• Status</span>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 5,
+              background: statusCfg.bg, borderRadius: 20, padding: '3px 10px',
+              fontSize: 11, fontWeight: 600, color: statusCfg.text,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: statusCfg.dot, flexShrink: 0 }} />
+              {statusCfg.label}
+            </span>
+          </div>
+
+          {/* Platform */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: project.platformLink ? 10 : 0 }}>
+            <span style={{ fontSize: 13, color: '#7A6B5D' }}>• Platform</span>
+            <span style={{
+              fontSize: 12, fontWeight: 500, color: '#B8A898',
+              background: '#1C1814', border: '1px solid #2E2923',
+              borderRadius: 6, padding: '3px 10px',
+            }}>
+              {PLATFORM_LABEL[project.platform] ?? project.platform}
+            </span>
+          </div>
+
+          {/* Platform link */}
+          {project.platformLink && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 0 }}>
+              <span style={{ fontSize: 13, color: '#7A6B5D' }}>• Link</span>
+              <a
+                href={project.platformLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: 12, color: '#C4956A', textDecoration: 'none',
+                  background: 'rgba(196,149,106,0.08)', borderRadius: 6, padding: '3px 10px',
+                }}
+              >
+                Open ↗
+              </a>
+            </div>
+          )}
+
         </div>
-      )}
+
+        {/* TEAM */}
+        <div style={{
+          background: '#221E19', border: '1px solid #2E2923',
+          borderRadius: 14, padding: '18px 20px',
+        }}>
+          <p style={{
+            margin: '0 0 16px', fontSize: 10, fontWeight: 700,
+            color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.1em',
+          }}>
+            Team ({members.length} Member{members.length !== 1 ? 's' : ''})
+          </p>
+
+          {members.length === 0 ? (
+            <p style={{ margin: 0, fontSize: 13, color: '#3A332C' }}>No members assigned yet.</p>
+          ) : (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
+              {members.map((m) => {
+                const hue = (m.name.charCodeAt(0) * 37 + m.name.charCodeAt(m.name.length - 1) * 17) % 360;
+                return (
+                  <div key={m._id} style={{
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', gap: 7,
+                  }}>
+                    <span style={{
+                      width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
+                      background: `hsl(${hue}, 20%, 24%)`,
+                      border: `2px solid hsl(${hue}, 20%, 32%)`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: 18, fontWeight: 700, color: '#C4956A',
+                    }}>
+                      {m.name.charAt(0).toUpperCase()}
+                    </span>
+                    <span style={{ fontSize: 11, fontWeight: 500, color: '#D4C8BC', textAlign: 'center', maxWidth: 60, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {m.name.split(' ')[0]}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* ADMIN ACTIONS */}
+        {role === 'admin' && (
+          <div style={{
+            background: '#221E19', border: '1px solid #2E2923',
+            borderRadius: 14, padding: '18px 20px',
+            display: 'flex', flexDirection: 'column', gap: 10,
+          }}>
+            <p style={{
+              margin: 0, fontSize: 10, fontWeight: 700,
+              color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.1em',
+            }}>
+              Admin Actions
+            </p>
+            <AssignMembersModal
+              projectId={project._id}
+              assignedMemberIds={members.map((m) => m._id)}
+              allMembers={allUsers}
+            />
+            <DeleteProjectButton projectId={project._id} projectName={project.name} />
+          </div>
+        )}
+      </div>
+
+      {/* ── Updates section ─────────────────────────── */}
+      <div>
+        {/* Updates header */}
+        <div style={{
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'space-between', marginBottom: 16,
+        }}>
+          <h2 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#F0E6DC', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+            Updates{' '}
+            <span style={{ fontWeight: 400, color: '#5A4F45', fontSize: 13, textTransform: 'none', letterSpacing: 0 }}>
+              ({updates.length} unique log{updates.length !== 1 ? 's' : ''})
+            </span>
+          </h2>
+
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button style={{
+              background: '#221E19', border: '1px solid #2E2923',
+              borderRadius: 8, padding: '6px 12px',
+              fontSize: 12, color: '#B8A898', cursor: 'default', fontFamily: 'inherit',
+              display: 'flex', alignItems: 'center', gap: 4,
+            }}>
+              Latest ▾
+            </button>
+            <button style={{
+              background: '#221E19', border: '1px solid #2E2923',
+              borderRadius: 8, padding: '6px 12px',
+              fontSize: 12, color: '#B8A898', cursor: 'default', fontFamily: 'inherit',
+              display: 'flex', alignItems: 'center', gap: 4,
+            }}>
+              {updates.length} unique{updates.length !== 1 ? 's' : ''} ▾
+            </button>
+          </div>
+        </div>
+
+        {/* Updates grid */}
+        {updates.length === 0 ? (
+          <EmptyUpdates />
+        ) : (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 16,
+            alignItems: 'start',
+          }}>
+            {updates.map((update) => (
+              <UpdateCard
+                key={update._id}
+                update={update}
+                projectName={project.name}
+                clientName={project.clientName}
+                currentUserId={userId}
+                currentUserRole={role}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
     </div>
   );
 }

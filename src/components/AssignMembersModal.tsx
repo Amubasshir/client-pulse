@@ -63,8 +63,8 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
       <button
         onClick={handleOpen}
         style={{
-          background: 'none', border: '1px solid #3A332C',
-          borderRadius: 7, padding: '6px 12px',
+          width: '100%', background: 'none', border: '1px solid #3A332C',
+          borderRadius: 7, padding: '8px 12px',
           fontSize: 12, color: '#B8A898', cursor: 'pointer',
           fontFamily: 'inherit', transition: 'all 0.15s',
         }}
