@@ -1,26 +1,78 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Backgrounds ─────────────────────────── */
+  --color-surface-page:     #12100E;
+  --color-surface-sidebar:  #1C1814;
+  --color-surface-card:     #221E19;
+  --color-surface-elevated: #2A2520;
+  --color-surface-input:    #1A1612;
+
+  /* ── Borders ─────────────────────────────── */
+  --color-border-default:   #2E2923;
+  --color-border-elevated:  #3A332C;
+
+  /* ── Accent: Copper ──────────────────────── */
+  --color-copper:           #C4956A;
+  --color-copper-hover:     #D4A574;
+  --color-gold:             #A07850;
+
+  /* ── Accent: Burnt Red (CTA / Danger) ────── */
+  --color-burnt:            #C4553A;
+  --color-burnt-hover:      #D4654A;
+
+  /* ── Text ────────────────────────────────── */
+  --color-text-primary:     #F0E6DC;
+  --color-text-secondary:   #B8A898;
+  --color-text-muted:       #7A6B5D;
+  --color-text-on-accent:   #1A1210;
+
+  /* ── Semantic ────────────────────────────── */
+  --color-success:          #5D8C5A;
+  --color-info:             #7A9BB5;
+
+  /* ── Typography ──────────────────────────── */
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Base ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #12100E;
+  color: #F0E6DC;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #2E2923;
+}
+::-webkit-scrollbar-thumb {
+  background: #4A3F35;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5A4F45;
+}
+
+/* ── Focus ring ────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #C4956A;
+  outline-offset: 2px;
 }
