@@ -76,3 +76,9 @@ body {
   outline: 2px solid #C4956A;
   outline-offset: 2px;
 }
+
+/* ── Shimmer animation (used by loading.tsx skeletons) ── */
+@keyframes shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}

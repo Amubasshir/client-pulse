@@ -83,7 +83,7 @@ export default async function ProjectsPage() {
           gap: 16,
         }}>
           {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
+            <ProjectCard key={project._id} project={project} isAdmin={role === 'admin'} />
           ))}
         </div>
       )}

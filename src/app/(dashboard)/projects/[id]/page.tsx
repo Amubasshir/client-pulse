@@ -8,6 +8,7 @@ import User from '@/models/User';
 import AddUpdateModal from '@/components/AddUpdateModal';
 import UpdateCard from '@/components/UpdateCard';
 import AssignMembersModal from '@/components/AssignMembersModal';
+import DeleteProjectButton from '@/components/DeleteProjectButton';
 
 interface PopulatedMember {
   _id: string;
@@ -200,8 +201,11 @@ export default async function ProjectDetailPage({ params }: PageParams) {
             )}
           </div>
 
-          {/* Members + assign button (admin only) */}
+          {/* Members + admin actions */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+            {role === 'admin' && (
+              <DeleteProjectButton projectId={project._id} projectName={project.name} />
+            )}
             {members.length > 0 && (
               <>
                 <span style={{ fontSize: 10, color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
