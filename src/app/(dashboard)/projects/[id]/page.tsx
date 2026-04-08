@@ -4,8 +4,10 @@ import Link from 'next/link';
 import connectDB from '@/lib/db';
 import Project from '@/models/Project';
 import Update from '@/models/Update';
+import User from '@/models/User';
 import AddUpdateModal from '@/components/AddUpdateModal';
 import UpdateCard from '@/components/UpdateCard';
+import AssignMembersModal from '@/components/AssignMembersModal';
 
 interface PopulatedMember {
   _id: string;
@@ -86,6 +88,15 @@ export default async function ProjectDetailPage({ params }: PageParams) {
     description: rawProject.description,
     assignedMembers: members,
   };
+
+  // Fetch all users for admin's assign-members modal
+  const allUsers = role === 'admin'
+    ? (await User.find({}).select('name email').sort({ name: 1 }).lean()).map((u) => ({
+        _id: u._id.toString(),
+        name: u.name,
+        email: u.email,
+      }))
+    : [];
 
   const rawUpdates = await Update.find({ project: projectId })
     .sort({ date: -1, createdAt: -1 })
@@ -189,43 +200,52 @@ export default async function ProjectDetailPage({ params }: PageParams) {
             )}
           </div>
 
-          {/* Members */}
-          {members.length > 0 && (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
-              <span style={{ fontSize: 10, color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
-                Team
-              </span>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {members.slice(0, 5).map((m, i) => (
-                  <span
-                    key={m._id}
-                    title={m.name}
-                    style={{
+          {/* Members + assign button (admin only) */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+            {members.length > 0 && (
+              <>
+                <span style={{ fontSize: 10, color: '#5A4F45', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                  Team
+                </span>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {members.slice(0, 5).map((m, i) => (
+                    <span
+                      key={m._id}
+                      title={m.name}
+                      style={{
+                        width: 28, height: 28, borderRadius: '50%',
+                        background: `hsl(${(m.name.charCodeAt(0) * 17) % 360}, 25%, 28%)`,
+                        border: '2px solid #221E19',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 11, fontWeight: 600, color: '#C4956A',
+                        marginLeft: i === 0 ? 0 : -8,
+                        position: 'relative', zIndex: 5 - i,
+                      }}
+                    >
+                      {m.name.charAt(0).toUpperCase()}
+                    </span>
+                  ))}
+                  {members.length > 5 && (
+                    <span style={{
                       width: 28, height: 28, borderRadius: '50%',
-                      background: `hsl(${(m.name.charCodeAt(0) * 17) % 360}, 25%, 28%)`,
-                      border: '2px solid #221E19',
+                      background: '#2A2520', border: '2px solid #221E19',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 11, fontWeight: 600, color: '#C4956A',
-                      marginLeft: i === 0 ? 0 : -8,
-                      position: 'relative', zIndex: 5 - i,
-                    }}
-                  >
-                    {m.name.charAt(0).toUpperCase()}
-                  </span>
-                ))}
-                {members.length > 5 && (
-                  <span style={{
-                    width: 28, height: 28, borderRadius: '50%',
-                    background: '#2A2520', border: '2px solid #221E19',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 9, color: '#7A6B5D', marginLeft: -8,
-                  }}>
-                    +{members.length - 5}
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
+                      fontSize: 9, color: '#7A6B5D', marginLeft: -8,
+                    }}>
+                      +{members.length - 5}
+                    </span>
+                  )}
+                </div>
+              </>
+            )}
+            {role === 'admin' && (
+              <AssignMembersModal
+                projectId={project._id}
+                assignedMemberIds={members.map((m) => m._id)}
+                allMembers={allUsers}
+              />
+            )}
+          </div>
         </div>
       </div>
 
