@@ -82,14 +82,14 @@ export default function DeleteProjectButton({ projectId, projectName }: {
               </div>
               <h2 style={{
                 margin: '0 0 8px', fontSize: 16, fontWeight: 700,
-                color: '#F0E6DC', letterSpacing: '-0.02em',
+                color: '#F5EDE6', letterSpacing: '-0.02em',
               }}>
                 Delete project?
               </h2>
               <p style={{
-                margin: 0, fontSize: 13, color: '#7A6B5D', lineHeight: 1.6,
+                margin: 0, fontSize: 13, color: '#B5A795', lineHeight: 1.6,
               }}>
-                <span style={{ color: '#B8A898', fontWeight: 500 }}>&ldquo;{projectName}&rdquo;</span>
+                <span style={{ color: '#DCCBB8', fontWeight: 500 }}>&ldquo;{projectName}&rdquo;</span>
                 {' '}and all its updates will be permanently deleted. This cannot be undone.
               </p>
             </div>
@@ -107,13 +107,13 @@ export default function DeleteProjectButton({ projectId, projectName }: {
                   background: 'none',
                   border: '1px solid #3A332C',
                   borderRadius: 8, padding: '9px 20px',
-                  fontSize: 13, color: '#B8A898',
+                  fontSize: 13, color: '#DCCBB8',
                   cursor: deleting ? 'not-allowed' : 'pointer',
                   fontFamily: 'inherit', transition: 'all 0.15s',
                   opacity: deleting ? 0.5 : 1,
                 }}
-                onMouseEnter={(e) => { if (!deleting) { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; } }}
-                onMouseLeave={(e) => { if (!deleting) { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; } }}
+                onMouseEnter={(e) => { if (!deleting) { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; } }}
+                onMouseLeave={(e) => { if (!deleting) { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; } }}
               >
                 Cancel
               </button>

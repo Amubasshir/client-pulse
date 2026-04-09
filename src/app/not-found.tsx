@@ -26,12 +26,12 @@ export default function NotFound() {
           margin: '0 0 10px',
           fontSize: 20,
           fontWeight: 600,
-          color: '#F0E6DC',
+          color: '#F5EDE6',
           letterSpacing: '-0.02em',
         }}>
           Page not found
         </h1>
-        <p style={{ margin: '0 0 28px', fontSize: 13, color: '#7A6B5D', lineHeight: 1.6 }}>
+        <p style={{ margin: '0 0 28px', fontSize: 13, color: '#B5A795', lineHeight: 1.6 }}>
           The page you&apos;re looking for doesn&apos;t exist or you don&apos;t have access to it.
         </p>
         <Link

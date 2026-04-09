@@ -107,18 +107,18 @@ export default function AddUpdateModal({ projectId }: Props) {
               padding: '18px 24px',
               borderBottom: '1px solid #2E2923',
             }}>
-              <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F0E6DC' }}>
+              <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F5EDE6' }}>
                 Add Update
               </h2>
               <button
                 onClick={() => { reset(); setOpen(false); }}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#5A4F45', fontSize: 20, lineHeight: 1, padding: 2,
+                  color: '#A89888', fontSize: 20, lineHeight: 1, padding: 2,
                   transition: 'color 0.15s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#B8A898'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#5A4F45'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#DCCBB8'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#A89888'; }}
               >
                 ×
               </button>
@@ -175,7 +175,7 @@ export default function AddUpdateModal({ projectId }: Props) {
                   onFocus={(e) => { e.currentTarget.style.borderColor = '#A07850'; }}
                   onBlur={(e) => { e.currentTarget.style.borderColor = '#3A2E26'; }}
                 />
-                <span style={{ fontSize: 11, color: '#5A4F45', marginTop: 2 }}>
+                <span style={{ fontSize: 11, color: '#A89888', marginTop: 2 }}>
                   Not included in client copy
                 </span>
               </Field>
@@ -199,11 +199,11 @@ export default function AddUpdateModal({ projectId }: Props) {
                   style={{
                     background: 'none', border: '1px solid #3A332C',
                     borderRadius: 8, padding: '9px 18px',
-                    fontSize: 13, color: '#B8A898', cursor: 'pointer',
+                    fontSize: 13, color: '#DCCBB8', cursor: 'pointer',
                     fontFamily: 'inherit', transition: 'border-color 0.15s, color 0.15s',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
                 >
                   Cancel
                 </button>
@@ -238,7 +238,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label style={{
-        fontSize: 11, fontWeight: 500, color: '#B8A898',
+        fontSize: 11, fontWeight: 500, color: '#DCCBB8',
         textTransform: 'uppercase', letterSpacing: '0.07em',
       }}>
         {label}
@@ -255,7 +255,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: 8,
   padding: '9px 12px',
   fontSize: 13,
-  color: '#F0E6DC',
+  color: '#F5EDE6',
   outline: 'none',
   fontFamily: 'inherit',
   transition: 'border-color 0.15s',

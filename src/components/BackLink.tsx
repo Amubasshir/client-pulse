@@ -8,11 +8,11 @@ export default function BackLink({ href, label }: { href: string; label: string 
       href={href}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 5,
-        fontSize: 12, color: '#7A6B5D', textDecoration: 'none',
+        fontSize: 12, color: '#B5A795', textDecoration: 'none',
         marginBottom: 20, transition: 'color 0.15s',
       }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#C4956A'; }}
-      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#7A6B5D'; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#B5A795'; }}
     >
       ← {label}
     </Link>

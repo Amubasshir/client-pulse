@@ -12,7 +12,7 @@ interface Props {
 
 const ROLE_CONFIG = {
   admin:  { label: 'Admin',  bg: 'rgba(196,149,106,0.1)',  text: '#C4956A',  border: 'rgba(196,149,106,0.25)' },
-  member: { label: 'Member', bg: 'rgba(184,168,152,0.08)', text: '#B8A898',  border: 'rgba(184,168,152,0.2)'  },
+  member: { label: 'Member', bg: 'rgba(184,168,152,0.08)', text: '#DCCBB8',  border: 'rgba(184,168,152,0.2)'  },
 };
 
 function formatJoined(iso: string) {
@@ -66,16 +66,16 @@ export default function MemberCard({ member, currentUserId, isLastAdmin }: Props
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 14, fontWeight: 600, color: '#F0E6DC', letterSpacing: '-0.01em' }}>
+              <span style={{ fontSize: 14, fontWeight: 600, color: '#F5EDE6', letterSpacing: '-0.01em' }}>
                 {member.name}
               </span>
               {isSelf && (
-                <span style={{ fontSize: 10, color: '#7A6B5D', background: '#1C1814', border: '1px solid #2E2923', borderRadius: 4, padding: '1px 6px' }}>
+                <span style={{ fontSize: 10, color: '#B5A795', background: '#1C1814', border: '1px solid #2E2923', borderRadius: 4, padding: '1px 6px' }}>
                   you
                 </span>
               )}
             </div>
-            <p style={{ margin: '2px 0 0', fontSize: 12, color: '#7A6B5D', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <p style={{ margin: '2px 0 0', fontSize: 12, color: '#B5A795', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {member.email}
             </p>
           </div>
@@ -100,16 +100,16 @@ export default function MemberCard({ member, currentUserId, isLastAdmin }: Props
             <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#C4956A' }}>
               {member.projectCount}
             </p>
-            <p style={{ margin: '1px 0 0', fontSize: 10, color: '#5A4F45' }}>
+            <p style={{ margin: '1px 0 0', fontSize: 10, color: '#A89888' }}>
               {member.projectCount === 1 ? 'Project' : 'Projects'}
             </p>
           </div>
           <div style={{ width: 1, height: 28, background: '#2E2923' }} />
           <div style={{ textAlign: 'center' }}>
-            <p style={{ margin: 0, fontSize: 12, fontWeight: 500, color: '#B8A898' }}>
+            <p style={{ margin: 0, fontSize: 12, fontWeight: 500, color: '#DCCBB8' }}>
               {formatJoined(member.createdAt)}
             </p>
-            <p style={{ margin: '1px 0 0', fontSize: 10, color: '#5A4F45' }}>
+            <p style={{ margin: '1px 0 0', fontSize: 10, color: '#A89888' }}>
               Joined
             </p>
           </div>
@@ -122,11 +122,11 @@ export default function MemberCard({ member, currentUserId, isLastAdmin }: Props
             style={{
               flex: 1, background: 'none', border: '1px solid #3A332C',
               borderRadius: 7, padding: '7px 0', fontSize: 12,
-              color: '#B8A898', cursor: 'pointer', fontFamily: 'inherit',
+              color: '#DCCBB8', cursor: 'pointer', fontFamily: 'inherit',
               transition: 'all 0.15s',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
           >
             Edit
           </button>
@@ -138,13 +138,13 @@ export default function MemberCard({ member, currentUserId, isLastAdmin }: Props
               flex: 1, background: 'none',
               border: `1px solid ${canDelete ? '#3A332C' : '#252018'}`,
               borderRadius: 7, padding: '7px 0', fontSize: 12,
-              color: canDelete ? '#7A6B5D' : '#3A332C',
+              color: canDelete ? '#B5A795' : '#3A332C',
               cursor: canDelete ? 'pointer' : 'not-allowed',
               fontFamily: 'inherit', transition: 'all 0.15s',
               opacity: deleting ? 0.5 : 1,
             }}
             onMouseEnter={(e) => { if (canDelete) { e.currentTarget.style.borderColor = 'rgba(196,85,58,0.4)'; e.currentTarget.style.color = '#C4553A'; } }}
-            onMouseLeave={(e) => { if (canDelete) { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#7A6B5D'; } }}
+            onMouseLeave={(e) => { if (canDelete) { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B5A795'; } }}
           >
             {deleting ? '…' : 'Delete'}
           </button>
@@ -234,18 +234,18 @@ function EditMemberModal({
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '18px 24px', borderBottom: '1px solid #2E2923',
         }}>
-          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F0E6DC' }}>
+          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F5EDE6' }}>
             Edit Member
           </h2>
           <button
             onClick={onClose}
             style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              color: '#5A4F45', fontSize: 20, lineHeight: 1, padding: 2,
+              color: '#A89888', fontSize: 20, lineHeight: 1, padding: 2,
               transition: 'color 0.15s',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#B8A898'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#5A4F45'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#DCCBB8'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#A89888'; }}
           >
             ×
           </button>
@@ -284,7 +284,7 @@ function EditMemberModal({
               <option value="admin">Admin</option>
             </select>
             {isLastAdmin && member.role === 'admin' && (
-              <span style={{ fontSize: 11, color: '#5A4F45' }}>Cannot demote the only admin</span>
+              <span style={{ fontSize: 11, color: '#A89888' }}>Cannot demote the only admin</span>
             )}
           </EField>
 
@@ -315,12 +315,12 @@ function EditMemberModal({
               type="button" onClick={onClose}
               style={{
                 background: 'none', border: '1px solid #3A332C', borderRadius: 8,
-                padding: '9px 18px', fontSize: 13, color: '#B8A898',
+                padding: '9px 18px', fontSize: 13, color: '#DCCBB8',
                 cursor: 'pointer', fontFamily: 'inherit',
                 transition: 'border-color 0.15s, color 0.15s',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
             >
               Cancel
             </button>
@@ -349,7 +349,7 @@ function EField({ label, children }: { label: string; children: React.ReactNode 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label style={{
-        fontSize: 11, fontWeight: 500, color: '#B8A898',
+        fontSize: 11, fontWeight: 500, color: '#DCCBB8',
         textTransform: 'uppercase', letterSpacing: '0.07em',
       }}>
         {label}
@@ -366,7 +366,7 @@ const eInputStyle: React.CSSProperties = {
   borderRadius: 8,
   padding: '9px 12px',
   fontSize: 13,
-  color: '#F0E6DC',
+  color: '#F5EDE6',
   outline: 'none',
   fontFamily: 'inherit',
   transition: 'border-color 0.15s',

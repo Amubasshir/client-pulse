@@ -61,10 +61,10 @@ export default async function ProjectsPage() {
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 600, color: '#F0E6DC', letterSpacing: '-0.025em' }}>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 600, color: '#F5EDE6', letterSpacing: '-0.025em' }}>
             Projects
           </h1>
-          <p style={{ margin: '5px 0 0', fontSize: 13, color: '#7A6B5D' }}>
+          <p style={{ margin: '5px 0 0', fontSize: 13, color: '#B5A795' }}>
             {projects.length} project{projects.length !== 1 ? 's' : ''}
             {role === 'member' ? ' assigned to you' : ' total'}
           </p>
@@ -102,10 +102,10 @@ function EmptyState({ isAdmin }: { isAdmin: boolean }) {
       textAlign: 'center',
     }}>
       <div style={{ fontSize: 32, marginBottom: 12 }}>📁</div>
-      <p style={{ margin: '0 0 6px', fontSize: 15, fontWeight: 500, color: '#B8A898' }}>
+      <p style={{ margin: '0 0 6px', fontSize: 15, fontWeight: 500, color: '#DCCBB8' }}>
         No projects yet
       </p>
-      <p style={{ margin: 0, fontSize: 13, color: '#5A4F45' }}>
+      <p style={{ margin: 0, fontSize: 13, color: '#A89888' }}>
         {isAdmin ? 'Create your first project using the button above.' : 'You have no projects assigned to you yet.'}
       </p>
     </div>

@@ -49,10 +49,10 @@ export default async function TeamPage() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 600, color: '#F0E6DC', letterSpacing: '-0.025em' }}>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 600, color: '#F5EDE6', letterSpacing: '-0.025em' }}>
             Team
           </h1>
-          <p style={{ margin: '5px 0 0', fontSize: 13, color: '#7A6B5D' }}>
+          <p style={{ margin: '5px 0 0', fontSize: 13, color: '#B5A795' }}>
             {members.length} member{members.length !== 1 ? 's' : ''}
           </p>
         </div>
@@ -89,10 +89,10 @@ function EmptyState() {
       borderRadius: 14, padding: '72px 24px', textAlign: 'center',
     }}>
       <div style={{ fontSize: 32, marginBottom: 12 }}>👥</div>
-      <p style={{ margin: '0 0 6px', fontSize: 15, fontWeight: 500, color: '#B8A898' }}>
+      <p style={{ margin: '0 0 6px', fontSize: 15, fontWeight: 500, color: '#DCCBB8' }}>
         No team members yet
       </p>
-      <p style={{ margin: 0, fontSize: 13, color: '#5A4F45' }}>
+      <p style={{ margin: 0, fontSize: 13, color: '#A89888' }}>
         Add your first member using the button above.
       </p>
     </div>

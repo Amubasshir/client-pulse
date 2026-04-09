@@ -85,11 +85,11 @@ export default async function DashboardPage() {
       <div style={{ marginBottom: 36 }}>
         <h1 style={{
           margin: 0, fontSize: 22, fontWeight: 600,
-          color: '#F0E6DC', letterSpacing: '-0.025em',
+          color: '#F5EDE6', letterSpacing: '-0.025em',
         }}>
           Good to see you, {firstName}
         </h1>
-        <p style={{ margin: '6px 0 0', fontSize: 13, color: '#7A6B5D' }}>
+        <p style={{ margin: '6px 0 0', fontSize: 13, color: '#B5A795' }}>
           Here&apos;s a summary of what&apos;s happening across your projects.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
       <section>
         <h2 style={{
           margin: '0 0 16px', fontSize: 13, fontWeight: 500,
-          color: '#B8A898', textTransform: 'uppercase', letterSpacing: '0.07em',
+          color: '#DCCBB8', textTransform: 'uppercase', letterSpacing: '0.07em',
         }}>
           Recent Updates
         </h2>
@@ -118,7 +118,7 @@ export default async function DashboardPage() {
             padding: '48px 24px',
             textAlign: 'center',
           }}>
-            <p style={{ margin: 0, fontSize: 13, color: '#5A4F45' }}>
+            <p style={{ margin: 0, fontSize: 13, color: '#A89888' }}>
               No updates yet — start by creating a project.
             </p>
           </div>
@@ -155,10 +155,10 @@ export default async function DashboardPage() {
                 {/* Content */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: '#F0E6DC' }}>
+                    <span style={{ fontSize: 13, fontWeight: 600, color: '#F5EDE6' }}>
                       {update.authorName}
                     </span>
-                    <span style={{ fontSize: 11, color: '#5A4F45' }}>logged an update in</span>
+                    <span style={{ fontSize: 11, color: '#A89888' }}>logged an update in</span>
                     <span style={{
                       fontSize: 11, fontWeight: 500, color: '#C4956A',
                       background: 'rgba(196,149,106,0.08)',
@@ -168,7 +168,7 @@ export default async function DashboardPage() {
                     </span>
                   </div>
                   <p style={{
-                    margin: 0, fontSize: 12, color: '#B8A898',
+                    margin: 0, fontSize: 12, color: '#DCCBB8',
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                     maxWidth: 600,
                   }}>
@@ -178,7 +178,7 @@ export default async function DashboardPage() {
 
                 {/* Time */}
                 <span style={{
-                  fontSize: 11, color: '#5A4F45', whiteSpace: 'nowrap', flexShrink: 0,
+                  fontSize: 11, color: '#A89888', whiteSpace: 'nowrap', flexShrink: 0,
                 }}>
                   {timeAgo(update.createdAt)}
                 </span>
@@ -205,11 +205,11 @@ function StatCard({ label, value }: { label: string; value: string }) {
     }}>
       <p style={{
         margin: '0 0 6px', fontSize: 11, fontWeight: 500,
-        color: '#7A6B5D', textTransform: 'uppercase', letterSpacing: '0.07em',
+        color: '#B5A795', textTransform: 'uppercase', letterSpacing: '0.07em',
       }}>
         {label}
       </p>
-      <p style={{ margin: 0, fontSize: 28, fontWeight: 600, color: '#F0E6DC', letterSpacing: '-0.04em' }}>
+      <p style={{ margin: 0, fontSize: 28, fontWeight: 600, color: '#F5EDE6', letterSpacing: '-0.04em' }}>
         {value}
       </p>
     </div>

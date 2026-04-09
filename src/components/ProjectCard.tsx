@@ -57,7 +57,7 @@ export default function ProjectCard({ project, isAdmin }: Props) {
 
           {/* Platform */}
           <span style={{
-            fontSize: 11, fontWeight: 500, color: '#7A6B5D',
+            fontSize: 11, fontWeight: 500, color: '#B5A795',
             background: '#1C1814', border: '1px solid #2E2923',
             borderRadius: 6, padding: '3px 8px',
           }}>
@@ -67,10 +67,10 @@ export default function ProjectCard({ project, isAdmin }: Props) {
 
         {/* Name + client */}
         <div>
-          <h3 style={{ margin: '0 0 3px', fontSize: 15, fontWeight: 600, color: '#F0E6DC', letterSpacing: '-0.015em' }}>
+          <h3 style={{ margin: '0 0 3px', fontSize: 15, fontWeight: 600, color: '#F5EDE6', letterSpacing: '-0.015em' }}>
             {project.name}
           </h3>
-          <p style={{ margin: 0, fontSize: 12, color: '#7A6B5D' }}>
+          <p style={{ margin: 0, fontSize: 12, color: '#B5A795' }}>
             {project.clientName}
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function ProjectCard({ project, isAdmin }: Props) {
         {/* Description */}
         {project.description && (
           <p style={{
-            margin: 0, fontSize: 12, color: '#B8A898',
+            margin: 0, fontSize: 12, color: '#DCCBB8',
             display: '-webkit-box', WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical', overflow: 'hidden',
             lineHeight: 1.5,
@@ -113,13 +113,13 @@ export default function ProjectCard({ project, isAdmin }: Props) {
                 width: 24, height: 24, borderRadius: '50%',
                 background: '#2A2520', border: '2px solid #221E19',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 9, color: '#7A6B5D', marginLeft: -6, fontWeight: 500,
+                fontSize: 9, color: '#B5A795', marginLeft: -6, fontWeight: 500,
               }}>
                 +{project.assignedMembers.length - 4}
               </span>
             )}
             {project.assignedMembers.length === 0 && (
-              <span style={{ fontSize: 11, color: '#5A4F45' }}>No members</span>
+              <span style={{ fontSize: 11, color: '#A89888' }}>No members</span>
             )}
           </div>
 
@@ -129,7 +129,7 @@ export default function ProjectCard({ project, isAdmin }: Props) {
               <button
                 onClick={() => setEditOpen(true)}
                 style={{
-                  fontSize: 12, color: '#7A6B5D', fontWeight: 500,
+                  fontSize: 12, color: '#B5A795', fontWeight: 500,
                   textDecoration: 'none', padding: '4px 10px',
                   background: 'none',
                   border: '1px solid #2E2923',
@@ -137,8 +137,8 @@ export default function ProjectCard({ project, isAdmin }: Props) {
                   fontFamily: 'inherit',
                   transition: 'all 0.15s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#2E2923'; e.currentTarget.style.color = '#7A6B5D'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#2E2923'; e.currentTarget.style.color = '#B5A795'; }}
               >
                 Edit
               </button>

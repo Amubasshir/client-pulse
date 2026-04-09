@@ -80,7 +80,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
             style={{
               fontSize: 20,
               fontWeight: 600,
-              color: '#F0E6DC',
+              color: '#F5EDE6',
               letterSpacing: '-0.02em',
               whiteSpace: 'nowrap',
               font: 'sans-serif',
@@ -154,7 +154,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
                   margin: 0,
                   fontSize: 12,
                   fontWeight: 500,
-                  color: '#F0E6DC',
+                  color: '#F5EDE6',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
@@ -166,7 +166,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
                 style={{
                   margin: 0,
                   fontSize: 11,
-                  color: '#7A6B5D',
+                  color: '#B5A795',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
@@ -182,7 +182,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                color: '#5A4F45',
+                color: '#A89888',
                 padding: 4,
                 borderRadius: 5,
                 flexShrink: 0,
@@ -195,7 +195,7 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
                 e.currentTarget.style.color = '#C4553A';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#5A4F45';
+                e.currentTarget.style.color = '#A89888';
               }}
             >
               <SignOutIcon />
@@ -217,16 +217,16 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#5A4F45',
+            color: '#A89888',
             transition: 'background 0.15s, color 0.15s',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = '#2A2520';
-            e.currentTarget.style.color = '#B8A898';
+            e.currentTarget.style.color = '#DCCBB8';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'none';
-            e.currentTarget.style.color = '#5A4F45';
+            e.currentTarget.style.color = '#A89888';
           }}
         >
           {collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -254,7 +254,7 @@ function NavLink({
     : hovered
       ? '#2A2520'
       : 'transparent';
-  const color = active ? '#C4956A' : hovered ? '#F0E6DC' : '#B8A898';
+  const color = active ? '#C4956A' : hovered ? '#F5EDE6' : '#DCCBB8';
 
   return (
     <Link

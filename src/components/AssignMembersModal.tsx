@@ -65,11 +65,11 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
         style={{
           width: '100%', background: 'none', border: '1px solid #3A332C',
           borderRadius: 7, padding: '8px 12px',
-          fontSize: 12, color: '#B8A898', cursor: 'pointer',
+          fontSize: 12, color: '#DCCBB8', cursor: 'pointer',
           fontFamily: 'inherit', transition: 'all 0.15s',
         }}
         onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#C4956A'; e.currentTarget.style.color = '#C4956A'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
       >
         Assign Members
       </button>
@@ -96,18 +96,18 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               padding: '18px 24px', borderBottom: '1px solid #2E2923',
             }}>
-              <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F0E6DC' }}>
+              <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F5EDE6' }}>
                 Assign Members
               </h2>
               <button
                 onClick={() => setOpen(false)}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#5A4F45', fontSize: 20, lineHeight: 1, padding: 2,
+                  color: '#A89888', fontSize: 20, lineHeight: 1, padding: 2,
                   transition: 'color 0.15s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#B8A898'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#5A4F45'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#DCCBB8'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#A89888'; }}
               >
                 ×
               </button>
@@ -116,7 +116,7 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
             {/* Member list */}
             <div style={{ padding: '12px 16px', maxHeight: 320, overflowY: 'auto' }}>
               {allMembers.length === 0 ? (
-                <p style={{ margin: '20px 0', textAlign: 'center', fontSize: 13, color: '#5A4F45' }}>
+                <p style={{ margin: '20px 0', textAlign: 'center', fontSize: 13, color: '#A89888' }}>
                   No team members yet. Add members on the Team page first.
                 </p>
               ) : (
@@ -166,10 +166,10 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
 
                       {/* Name + email */}
                       <div style={{ flex: 1, minWidth: 0 }} onClick={() => toggle(m._id)}>
-                        <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: '#F0E6DC' }}>
+                        <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: '#F5EDE6' }}>
                           {m.name}
                         </p>
-                        <p style={{ margin: 0, fontSize: 11, color: '#5A4F45', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <p style={{ margin: 0, fontSize: 11, color: '#A89888', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {m.email}
                         </p>
                       </div>
@@ -196,7 +196,7 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
               display: 'flex', gap: 10, justifyContent: 'space-between', alignItems: 'center',
               padding: '16px 24px', borderTop: '1px solid #2E2923', marginTop: 8,
             }}>
-              <span style={{ fontSize: 12, color: '#5A4F45' }}>
+              <span style={{ fontSize: 12, color: '#A89888' }}>
                 {selected.size} selected
               </span>
               <div style={{ display: 'flex', gap: 10 }}>
@@ -204,11 +204,11 @@ export default function AssignMembersModal({ projectId, assignedMemberIds, allMe
                   onClick={() => setOpen(false)}
                   style={{
                     background: 'none', border: '1px solid #3A332C', borderRadius: 8,
-                    padding: '8px 16px', fontSize: 13, color: '#B8A898',
+                    padding: '8px 16px', fontSize: 13, color: '#DCCBB8',
                     cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.15s',
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#DCCBB8'; }}
                 >
                   Cancel
                 </button>

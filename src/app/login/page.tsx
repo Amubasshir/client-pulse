@@ -97,14 +97,14 @@ export default function LoginPage() {
               style={{
                 fontSize: 19,
                 fontWeight: 600,
-                color: '#F0E6DC',
+                color: '#F5EDE6',
                 letterSpacing: '-0.025em',
               }}
             >
               ClientPulse
             </span>
           </div>
-          <p style={{ fontSize: 13, color: '#7A6B5D', margin: 0 }}>
+          <p style={{ fontSize: 13, color: '#B5A795', margin: 0 }}>
             Sign in to your workspace
           </p>
         </div>
@@ -227,7 +227,7 @@ export default function LoginPage() {
           style={{
             textAlign: 'center',
             fontSize: 12,
-            color: '#5A4F45',
+            color: '#A89888',
             marginTop: 24,
           }}
         >
@@ -253,7 +253,7 @@ function Field({
         style={{
           fontSize: 11,
           fontWeight: 500,
-          color: '#B8A898',
+          color: '#DCCBB8',
           textTransform: 'uppercase',
           letterSpacing: '0.07em',
         }}
@@ -272,7 +272,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: 8,
   padding: '10px 13px',
   fontSize: 14,
-  color: '#F0E6DC',
+  color: '#F5EDE6',
   outline: 'none',
   fontFamily: 'inherit',
   transition: 'border-color 0.15s',

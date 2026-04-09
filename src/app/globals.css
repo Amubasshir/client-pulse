@@ -23,9 +23,9 @@
   --color-burnt-hover:      #D4654A;
 
   /* ── Text ────────────────────────────────── */
-  --color-text-primary:     #F0E6DC;
-  --color-text-secondary:   #B8A898;
-  --color-text-muted:       #7A6B5D;
+  --color-text-primary:     #F5EDE6;
+  --color-text-secondary:   #DCCBB8;
+  --color-text-muted:       #B5A795;
   --color-text-on-accent:   #1A1210;
 
   /* ── Semantic ────────────────────────────── */
@@ -49,7 +49,7 @@ html {
 
 body {
   background-color: #12100E;
-  color: #F0E6DC;
+  color: #F5EDE6;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,7 +68,7 @@ body {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #5A4F45;
+  background: #A89888;
 }
 
 /* ── Focus ring ────────────────────────────── */

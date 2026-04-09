@@ -65,7 +65,7 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
   return (
     <>
       <div style={{
-        background: '#221E19',
+        background: '#2D2820',
         border: '1px solid #2E2923',
         borderRadius: 12,
         overflow: 'hidden',
@@ -75,24 +75,24 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '13px 18px',
           borderBottom: '1px solid #2E2923',
-          background: '#1E1A16',
+          background: '#252019',
           gap: 12, flexWrap: 'wrap',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             {/* Author avatar */}
             <span style={{
               width: 26, height: 26, borderRadius: '50%', flexShrink: 0,
-              background: `hsl(${(update.author.name.charCodeAt(0) * 17) % 360}, 25%, 28%)`,
+              background: `hsl(${(update.author.name.charCodeAt(0) * 17) % 360}, 28%, 36%)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 10, fontWeight: 700, color: '#C4956A',
             }}>
               {update.author.name.charAt(0).toUpperCase()}
             </span>
             <div>
-              <span style={{ fontSize: 13, fontWeight: 500, color: '#F0E6DC' }}>
+              <span style={{ fontSize: 13, fontWeight: 500, color: '#F5EDE6' }}>
                 {update.author.name}
               </span>
-              <span style={{ fontSize: 11, color: '#5A4F45', marginLeft: 6 }}>
+              <span style={{ fontSize: 11, color: '#A89888', marginLeft: 6 }}>
                 {formatDate(update.date)}
               </span>
             </div>
@@ -151,13 +151,13 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
                   Internal Note
                 </span>
                 <span style={{
-                  fontSize: 9, color: '#7A6B5D', background: '#1C1814',
+                  fontSize: 9, color: '#B5A795', background: '#1C1814',
                   border: '1px solid #2E2923', borderRadius: 4, padding: '1px 5px',
                 }}>
                   Not sent to client
                 </span>
               </div>
-              <p style={{ margin: 0, fontSize: 13, color: '#B8A898', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+              <p style={{ margin: 0, fontSize: 13, color: '#DCCBB8', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
                 {update.content.notes}
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
         >
           <div style={{
             width: '100%', maxWidth: 400,
-            background: '#221E19',
+            background: '#2D2820',
             border: '1px solid #3A332C',
             borderRadius: 16,
             overflow: 'hidden',
@@ -204,12 +204,12 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
               }}>
                 🗑️
               </div>
-              <h2 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 600, color: '#F0E6DC' }}>
+              <h2 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 600, color: '#F5EDE6' }}>
                 Delete Update?
               </h2>
-              <p style={{ margin: '0 0 22px', fontSize: 13, color: '#7A6B5D', lineHeight: 1.5 }}>
-                This update by <strong style={{ color: '#B8A898' }}>{update.author.name}</strong> on{' '}
-                <strong style={{ color: '#B8A898' }}>{new Date(update.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</strong> will be permanently removed.
+              <p style={{ margin: '0 0 22px', fontSize: 13, color: '#B5A795', lineHeight: 1.5 }}>
+                This update by <strong style={{ color: '#DCCBB8' }}>{update.author.name}</strong> on{' '}
+                <strong style={{ color: '#DCCBB8' }}>{new Date(update.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</strong> will be permanently removed.
               </p>
             </div>
 
@@ -223,11 +223,11 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
                 style={{
                   flex: 1, background: 'none', border: '1px solid #3A332C',
                   borderRadius: 8, padding: '10px 0',
-                  fontSize: 13, color: '#B8A898', cursor: 'pointer',
+                  fontSize: 13, color: '#DCCBB8', cursor: 'pointer',
                   fontFamily: 'inherit', transition: 'border-color 0.15s, color 0.15s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#4A4038'; e.currentTarget.style.color = '#DCCBB8'; }}
               >
                 Cancel
               </button>
@@ -276,7 +276,7 @@ function Section({ label, color, children }: { label: string; color: string; chi
       }}>
         {label}
       </span>
-      <p style={{ margin: 0, fontSize: 13, color: '#D4C8BC', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>
+      <p style={{ margin: 0, fontSize: 13, color: '#EDE4D8', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>
         {children}
       </p>
     </div>
@@ -299,18 +299,18 @@ function ActionBtn({
       border: '1px solid rgba(196,149,106,0.25)',
     },
     ghost: {
-      background: 'transparent', color: '#7A6B5D',
+      background: 'transparent', color: '#B5A795',
       border: '1px solid #2E2923',
     },
     danger: {
-      background: 'transparent', color: '#7A6B5D',
+      background: 'transparent', color: '#B5A795',
       border: '1px solid #2E2923',
     },
   };
 
   const hoverStyles: Record<string, Partial<React.CSSProperties>> = {
     copper: { background: 'rgba(196,149,106,0.18)', color: '#D4A574', borderColor: 'rgba(196,149,106,0.4)' },
-    ghost: { background: '#2A2520', color: '#B8A898', borderColor: '#3A332C' },
+    ghost: { background: '#342E27', color: '#DCCBB8', borderColor: '#4A4038' },
     danger: { background: 'rgba(196,85,58,0.08)', color: '#C4553A', borderColor: 'rgba(196,85,58,0.3)' },
   };
 
@@ -405,7 +405,7 @@ function EditModal({
     >
       <div style={{
         width: '100%', maxWidth: 520,
-        background: '#221E19',
+        background: '#2D2820',
         border: '1px solid #3A332C',
         borderRadius: 16,
         overflow: 'hidden',
@@ -417,18 +417,18 @@ function EditModal({
           padding: '18px 24px',
           borderBottom: '1px solid #2E2923',
         }}>
-          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F0E6DC' }}>
+          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: '#F5EDE6' }}>
             Edit Update
           </h2>
           <button
             onClick={onClose}
             style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              color: '#5A4F45', fontSize: 20, lineHeight: 1, padding: 2,
+              color: '#A89888', fontSize: 20, lineHeight: 1, padding: 2,
               transition: 'color 0.15s',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#B8A898'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#5A4F45'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#DCCBB8'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#A89888'; }}
           >
             ×
           </button>
@@ -444,7 +444,7 @@ function EditModal({
               required rows={3}
               style={{ ...editInputStyle, resize: 'vertical', lineHeight: 1.6 }}
               onFocus={(e) => { e.currentTarget.style.borderColor = '#C4956A'; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = '#2E2923'; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = '#3C3328'; }}
             />
           </EditField>
 
@@ -455,7 +455,7 @@ function EditModal({
               required rows={3}
               style={{ ...editInputStyle, resize: 'vertical', lineHeight: 1.6 }}
               onFocus={(e) => { e.currentTarget.style.borderColor = '#C4956A'; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = '#2E2923'; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = '#3C3328'; }}
             />
           </EditField>
 
@@ -466,7 +466,7 @@ function EditModal({
               rows={2}
               style={{ ...editInputStyle, resize: 'vertical', lineHeight: 1.6 }}
               onFocus={(e) => { e.currentTarget.style.borderColor = '#C4956A'; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = '#2E2923'; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = '#3C3328'; }}
             />
           </EditField>
 
@@ -497,11 +497,11 @@ function EditModal({
               type="button" onClick={onClose}
               style={{
                 background: 'none', border: '1px solid #3A332C', borderRadius: 8,
-                padding: '9px 18px', fontSize: 13, color: '#B8A898', cursor: 'pointer',
+                padding: '9px 18px', fontSize: 13, color: '#DCCBB8', cursor: 'pointer',
                 fontFamily: 'inherit', transition: 'border-color 0.15s, color 0.15s',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#A89888'; e.currentTarget.style.color = '#F5EDE6'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#4A4038'; e.currentTarget.style.color = '#DCCBB8'; }}
             >
               Cancel
             </button>
@@ -530,7 +530,7 @@ function EditField({ label, children }: { label: string; children: React.ReactNo
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label style={{
-        fontSize: 11, fontWeight: 500, color: '#B8A898',
+        fontSize: 11, fontWeight: 500, color: '#DCCBB8',
         textTransform: 'uppercase', letterSpacing: '0.07em',
       }}>
         {label}
@@ -542,12 +542,12 @@ function EditField({ label, children }: { label: string; children: React.ReactNo
 
 const editInputStyle: React.CSSProperties = {
   width: '100%',
-  background: '#1A1612',
+  background: '#221C16',
   border: '1px solid #2E2923',
   borderRadius: 8,
   padding: '9px 12px',
   fontSize: 13,
-  color: '#F0E6DC',
+  color: '#F5EDE6',
   outline: 'none',
   fontFamily: 'inherit',
   transition: 'border-color 0.15s',
