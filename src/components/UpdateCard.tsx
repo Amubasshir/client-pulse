@@ -44,6 +44,7 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
 
   const [copied, setCopied] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
 
   async function handleCopy() {
@@ -54,10 +55,10 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
   }
 
   async function handleDelete() {
-    if (!confirm('Delete this update?')) return;
     setDeleting(true);
     await fetch(`/api/updates/${update._id}`, { method: 'DELETE' });
     setDeleting(false);
+    setDeleteOpen(false);
     router.refresh();
   }
 
@@ -113,10 +114,9 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
             )}
             {canEdit && (
               <ActionBtn
-                onClick={handleDelete}
-                label={deleting ? '…' : 'Delete'}
+                onClick={() => setDeleteOpen(true)}
+                label="Delete"
                 variant="danger"
-                disabled={deleting}
               />
             )}
           </div>
@@ -172,6 +172,94 @@ export default function UpdateCard({ update, projectName, clientName, currentUse
           onClose={() => setEditOpen(false)}
           onSaved={() => { setEditOpen(false); router.refresh(); }}
         />
+      )}
+
+      {deleteOpen && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 50,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: 16,
+            background: 'rgba(12,10,8,0.76)',
+            backdropFilter: 'blur(4px)',
+          }}
+          onClick={(e) => { if (e.target === e.currentTarget) setDeleteOpen(false); }}
+        >
+          <div style={{
+            width: '100%', maxWidth: 400,
+            background: '#221E19',
+            border: '1px solid #3A332C',
+            borderRadius: 16,
+            overflow: 'hidden',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.64)',
+          }}>
+            {/* Header */}
+            <div style={{ padding: '22px 24px 0', textAlign: 'center' }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: '50%', margin: '0 auto 14px',
+                background: 'rgba(196,85,58,0.1)',
+                border: '1px solid rgba(196,85,58,0.25)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 20,
+              }}>
+                🗑️
+              </div>
+              <h2 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 600, color: '#F0E6DC' }}>
+                Delete Update?
+              </h2>
+              <p style={{ margin: '0 0 22px', fontSize: 13, color: '#7A6B5D', lineHeight: 1.5 }}>
+                This update by <strong style={{ color: '#B8A898' }}>{update.author.name}</strong> on{' '}
+                <strong style={{ color: '#B8A898' }}>{new Date(update.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</strong> will be permanently removed.
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div style={{
+              display: 'flex', gap: 10, padding: '0 24px 22px',
+            }}>
+              <button
+                onClick={() => setDeleteOpen(false)}
+                disabled={deleting}
+                style={{
+                  flex: 1, background: 'none', border: '1px solid #3A332C',
+                  borderRadius: 8, padding: '10px 0',
+                  fontSize: 13, color: '#B8A898', cursor: 'pointer',
+                  fontFamily: 'inherit', transition: 'border-color 0.15s, color 0.15s',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#5A4F45'; e.currentTarget.style.color = '#F0E6DC'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#3A332C'; e.currentTarget.style.color = '#B8A898'; }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                style={{
+                  flex: 1, background: '#C4553A', border: 'none',
+                  borderRadius: 8, padding: '10px 0',
+                  fontSize: 13, fontWeight: 600, color: '#fff',
+                  cursor: deleting ? 'not-allowed' : 'pointer',
+                  fontFamily: 'inherit', opacity: deleting ? 0.7 : 1,
+                  transition: 'background 0.15s',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                }}
+                onMouseEnter={(e) => { if (!deleting) e.currentTarget.style.background = '#D4644A'; }}
+                onMouseLeave={(e) => { if (!deleting) e.currentTarget.style.background = '#C4553A'; }}
+              >
+                {deleting ? (
+                  <>
+                    <span style={{
+                      width: 12, height: 12, border: '2px solid rgba(255,255,255,0.3)',
+                      borderTopColor: '#fff', borderRadius: '50%',
+                      animation: 'spin 0.7s linear infinite', display: 'inline-block',
+                    }} />
+                    Deleting…
+                  </>
+                ) : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
