@@ -4,6 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'ClientPulse',
   description: 'Team update tracker for client communication',
+  icons: { icon: '/pulse.ico' },
 };
 
 export default function RootLayout({
