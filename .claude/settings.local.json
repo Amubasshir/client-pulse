@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd /c \"taskkill /F /PID 19288\")",
+      "Bash(cmd /c \"for /f \\\\\"tokens=5\\\\\" %a in \\('netstat -ano ^| findstr :3000 ^| findstr LISTENING'\\) do taskkill /F /PID %a\")",
+      "Bash(powershell -Command \"Stop-Process -Id 19288 -Force; Write-Host 'done'\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":3000 \")",
+      "Bash(findstr LISTENING)"
+    ]
+  }
+}
