@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import logoImg from '../../public/pulse.png';
+import NotificationBell from './NotificationBell';
 
 export interface SidebarUser {
   name: string;
@@ -115,6 +116,13 @@ export default function Sidebar({ user }: { user: SidebarUser }) {
           );
         })}
       </nav>
+
+      {/* Notification bell — admin only */}
+      {user.role === 'admin' && (
+        <div style={{ padding: '4px 8px', borderTop: '1px solid #2E2923' }}>
+          <NotificationBell collapsed={collapsed} />
+        </div>
+      )}
 
       {/* User + collapse toggle */}
       <div

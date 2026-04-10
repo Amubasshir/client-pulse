@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import connectDB from '@/lib/db';
 import Update from '@/models/Update';
+import Project from '@/models/Project';
+import { createNotification } from '@/lib/createNotification';
 
 type Params = { params: Promise<{ updateId: string }> };
 
@@ -56,6 +58,18 @@ export async function PATCH(req: NextRequest, { params }: Params) {
   const populated = await Update.findById(updateId)
     .populate('author', 'name email')
     .lean();
+
+  if (session.user.role !== 'admin') {
+    const proj = await Project.findById(update.project).select('name').lean();
+    void createNotification({
+      memberId: session.user.id,
+      memberName: session.user.name ?? 'A team member',
+      projectId: update.project.toString(),
+      projectName: (proj as { name: string } | null)?.name ?? 'a project',
+      action: 'edited',
+      updateId: updateId,
+    });
+  }
 
   return NextResponse.json(populated);
 }
