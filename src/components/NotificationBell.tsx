@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface Notification {
   _id: string;
   memberName: string;
   projectName: string;
+  projectId: string;
   action: 'created' | 'edited';
   read: boolean;
   createdAt: string;
@@ -68,10 +70,13 @@ export default function NotificationBell({ collapsed }: { collapsed: boolean }) 
       setOpen(false);
       return;
     }
-    // Compute fixed position from bell button rect
+    // Compute fixed position — open upward from the bell button's bottom edge
     if (bellRef.current) {
       const rect = bellRef.current.getBoundingClientRect();
-      setDropdownPos({ top: rect.top, left: rect.right + 8 });
+      setDropdownPos({
+        top: window.innerHeight - rect.bottom, // distance from viewport bottom
+        left: rect.right + 8,
+      });
     }
     setOpen(true);
     // Optimistic mark-all-read
@@ -214,10 +219,9 @@ export default function NotificationBell({ collapsed }: { collapsed: boolean }) 
         <div
           style={{
             position: 'fixed',
-            top: dropdownPos.top,
+            bottom: dropdownPos.top,
             left: dropdownPos.left,
             width: 300,
-            maxHeight: 380,
             background: '#221E19',
             border: '1px solid #2E2923',
             borderRadius: 10,
@@ -256,17 +260,24 @@ export default function NotificationBell({ collapsed }: { collapsed: boolean }) 
                 No notifications yet
               </p>
             ) : (
-              notifications.map((n) => (
-                <div
+              notifications.slice(0, 3).map((n, i) => (
+                <Link
                   key={n._id}
+                  href={`/projects/${n.projectId}`}
+                  onClick={() => setOpen(false)}
                   style={{
                     padding: '10px 14px',
-                    borderBottom: '1px solid #2E2923',
+                    borderBottom: i < Math.min(notifications.length, 3) - 1 ? '1px solid #2E2923' : 'none',
                     display: 'flex',
                     gap: 10,
                     alignItems: 'flex-start',
                     background: !n.read ? 'rgba(196,149,106,0.04)' : 'transparent',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    transition: 'background 0.15s',
                   }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#2A2520'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = !n.read ? 'rgba(196,149,106,0.04)' : 'transparent'; }}
                 >
                   {/* Member initial avatar */}
                   <span
@@ -319,7 +330,7 @@ export default function NotificationBell({ collapsed }: { collapsed: boolean }) 
                       }}
                     />
                   )}
-                </div>
+                </Link>
               ))
             )}
           </div>
